@@ -71,6 +71,10 @@ const ShoppingListing = () => {
     dispatch(fetchProductDetails(getCurrentProductId))
   }
 
+  function handleAddtoCart(getCurrentProductId){
+    console.log("this is latest id add to cart",getCurrentProductId)
+  }
+
   useEffect(() => {
     setSort("price-lowtohigh");
     setFilters(JSON.parse(sessionStorage.getItem("filters")) || {});
@@ -92,7 +96,6 @@ const ShoppingListing = () => {
   useEffect(()=>{
     if(productDetails !==null)setOpenDetailsDialog(true)
   },[productDetails])
-  console.log(productDetails,'productDetials');
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 md:p-6">
       <aside className="w-full md:w-[200px]">
@@ -137,7 +140,7 @@ const ShoppingListing = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 md:grid-cols-3 gap-4 p-4">
           {productList && productList.length > 0
             ? productList.map((productItem) => (
-                <ProductTile handleGetProductDetails={handleGetProductDetails} product={productItem} />
+                <ProductTile handleGetProductDetails={handleGetProductDetails} product={productItem} handleAddtoCart={handleAddtoCart}/>
               ))
             : null}
         </div>
